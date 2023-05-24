@@ -1,0 +1,30 @@
+<div class="login-container">
+    <div class="login-content">
+        <mat-toolbar class="login-toolbar" color="primary"> Welcome ! </mat-toolbar>
+        <mat-card>
+            <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="formContainer">
+                <mat-form-field class="cus-form-field" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <mat-icon matPrefix>mail</mat-icon>
+                    <input matInput formControlName="email" placeholder="Email">
+                    <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                       {{loginForm.get('email')?.hasError('required') ? 'Email is required' : 'Email is invalid'}}
+                    </mat-error>
+                </mat-form-field>
+              
+                <mat-form-field class="cus-form-field" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <mat-icon matPrefix>key</mat-icon>
+                    <input matInput type="password" formControlName="password" placeholder="Password">
+                    <mat-error
+                        *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                        Password is required
+                    </mat-error>
+                </mat-form-field>
+                <a  class="custom-link" routerLink="/signup">Create account ? </a>
+                <button mat-raised-button color="primary" class="loginBtn" type="submit">Login</button>
+                <p-toast></p-toast>
+            </form>
+        </mat-card>
+    </div>
+</div>

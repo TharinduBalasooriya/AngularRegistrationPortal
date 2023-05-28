@@ -23,6 +23,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { ProfileComponent } from './profile/profile.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {CookieService} from 'ngx-cookie-service';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,8 @@ import {CookieService} from 'ngx-cookie-service';
     MatButtonModule,
     ToastModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressBarModule
   ],
   providers: [MessageService , CookieService],
   bootstrap: [AppComponent]

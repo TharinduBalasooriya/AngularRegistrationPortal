@@ -1,46 +1,48 @@
 <div class="login-container">
     <div class="login-content">
+  
+      <mat-toolbar class="login-toolbar" color="primary">Sign up</mat-toolbar>
+      <mat-card>
+        <form [formGroup]="registrationForm" (ngSubmit)="submitForm()" class="formContainer">
+          <mat-form-field class="cus-form-field" appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" placeholder="First Name">
+            <mat-error *ngIf="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched">
+              First Name is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="cus-form-field" appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" placeholder="Last Name">
+            <mat-error *ngIf="registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched">
+              Last Name is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="cus-form-field" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="Email">
+            <mat-error *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+              {{registrationForm.get('email')?.hasError('required') ? 'Email is required' : 'Email is invalid'}}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="cus-form-field" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" placeholder="Password">
+  
+            <mat-error *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched " class="cusError">
+              {{' Password must be at least 8 characters long and contain at least one digit, one uppercase letter, one lowercase letter, and one special character.'}}
+            </mat-error>
+          </mat-form-field>
+  
+          <a class="custom-link" routerLink="/login">Already have an account?</a>
+          <mat-progress-bar mode="indeterminate" class="progressBar" *ngIf="isWaiting"></mat-progress-bar>
+          <button mat-raised-button color="primary" class="signUpBtn" type="submit" *ngIf="!isWaiting">Sign Up</button>
+         
 
-        <mat-toolbar class="login-toolbar" color="primary"> Sign up</mat-toolbar>
-        <mat-card>
-            <form [formGroup]="registrationForm" (ngSubmit)="submitForm()" class="formContainer">
-                <mat-form-field class="cus-form-field " appearance="outline">
-                    <mat-label>First Name</mat-label>
-                    <input matInput formControlName="firstName" placeholder="First Name">
-                    <mat-error
-                        *ngIf="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched">
-                        First Name is required
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field class="cus-form-field" appearance="outline">
-                    <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="lastName" placeholder="Last Name">
-                    <mat-error
-                        *ngIf="registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched">
-                        Last Name is required
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field class="cus-form-field" appearance="outline">
-                    <mat-label>Email</mat-label>
-                    <input matInput formControlName="email" placeholder="Email">
-                    <mat-error *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
-                       {{registrationForm.get('email')?.hasError('required') ? 'Email is required' : 'Email is invalid'}}
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field class="cus-form-field" appearance="outline">
-                    <mat-label>Password</mat-label>
-                    <input matInput type="password" formControlName="password" placeholder="Password">
-                    <mat-error
-                        *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
-                        {{registrationForm.get('password')?.value.length < 8 ? 'Password must be at least 8 characters long' : 'Password is required'}}
-                    </mat-error>
-                </mat-form-field>
-             
-                <a  class="custom-link" routerLink="/login">Already have an account?</a>
-                <button mat-raised-button color="primary" class="signUpBtn" type="submit">Sign Up</button>
-                <p-toast></p-toast>
-            </form>
-        </mat-card>
-
+          <p-toast></p-toast>
+        </form>
+      </mat-card>
+  
     </div>
-</div>
+  </div>
+  

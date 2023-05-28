@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit{
   loginForm: FormGroup;
+  isWaiting = false;
   constructor(private formBuilder: FormBuilder, private authService: AuthServiceService, private messageService: MessageService , private router: Router) {
     this.loginForm = this.formBuilder.group({});
   }
@@ -25,8 +26,10 @@ export class LoginComponent implements OnInit{
         email: this.loginForm.value.email,
         password: this.loginForm.value.password
       };
+      this.isWaiting = true;
       this.authService.loginUser(payload.email , payload.password).subscribe((response  ) => {
         if(response){
+          this.isWaiting = false;
           //Success toast message
           this.messageService.add({severity:'success', summary: 'Success', detail: 'User Logged In Successfully'});
           //Set token and isLoggedIn to true
@@ -34,15 +37,15 @@ export class LoginComponent implements OnInit{
           this.authService.setToken(response['token']);
           this.authService.setUserId(response['userId']);
 
-          console.log(this.authService.getUserId());
+         
           //navigate to profile page
           setTimeout(() => {
-            console.log("Navigating to profile page");
+         
             this.router.navigate(['/profile']);
           }, 1000);
         }
       },(error) => {
-        console.log(error.error);
+        this.isWaiting = false;
         //Error toast message
         this.messageService.add({severity:'error', summary: 'Error', detail: 'User Login Failed : ' + error.error.error});
       });

@@ -51,7 +51,13 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.prod.ts"
+                }
+              ]
             },
             "development": {
               "buildOptimizer": false,
@@ -69,6 +75,7 @@
           "configurations": {
             "production": {
               "browserTarget": "AngularRegistrationApp:build:production"
+              
             },
             "development": {
               "browserTarget": "AngularRegistrationApp:build:development"

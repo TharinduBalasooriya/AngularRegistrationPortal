@@ -4,6 +4,7 @@ import { User } from './models/User.type';
 import { HttpClient } from '@angular/common/http';
 import { LoginResponse } from './models/LoginResponse.type';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthServiceService {
   private userId: number = -1;
   constructor(private http: HttpClient , private cookieService: CookieService) { }
 
-  URL = "http://localhost:5000"
+  URL = environment.apiPrefix;
   //Sign up
   signUpUser(user: User) {
     return this.http.post(`${this.URL}/api/signup`, user)

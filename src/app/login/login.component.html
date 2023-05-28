@@ -22,7 +22,8 @@
                     </mat-error>
                 </mat-form-field>
                 <a  class="custom-link" routerLink="/signup">Create account ? </a>
-                <button mat-raised-button color="primary" class="loginBtn" type="submit">Login</button>
+                <mat-progress-bar mode="indeterminate" class="progressBar" *ngIf="isWaiting"></mat-progress-bar>
+                <button mat-raised-button color="primary" class="loginBtn" type="submit" *ngIf="!isWaiting">Login</button>
                 <p-toast></p-toast>
             </form>
         </mat-card>

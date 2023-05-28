@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthServiceService } from '../auth-service.service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,8 +12,9 @@ import { MessageService } from 'primeng/api';
 })
 export class SignUpComponent {
   registrationForm: FormGroup;
+  isWaiting = false;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthServiceService , private messageService: MessageService) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthServiceService , private messageService: MessageService , private router: Router) {
     this.registrationForm = this.formBuilder.group({});
    }
 
@@ -28,7 +30,7 @@ export class SignUpComponent {
 
 
   submitForm(): void {
-    console.log(this.registrationForm.value);
+ 
     if (this.registrationForm.valid) {
       const payload = {
         firstName: this.registrationForm.value.firstName,
@@ -37,13 +39,24 @@ export class SignUpComponent {
         password: this.registrationForm.value.password
       };
   
+      this.isWaiting = true;
       this.authService.signUpUser(payload).subscribe((response) => {
+        this.isWaiting = false;
         if(response){
          //Success toast message
           this.messageService.add({severity:'success', summary: 'Success', detail: 'User Registered Successfully'});
+         
+          /**
+           * Wait & Navigate to login page
+           */
+          setTimeout(() => {
+           this.router.navigate(['/login']);
+          }, 2000);
         }
       },(error) => {
-        console.log(error.error);
+        this.isWaiting = false;
+        
+     
         //Error toast message
         this.messageService.add({severity:'error', summary: 'Error', detail: 'User Registration Failed : ' + error.error.error});
       });

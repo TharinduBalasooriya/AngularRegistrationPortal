@@ -1,26 +1,29 @@
 <div class="header">
-    <h2 class="title">Profile Summary</h2>
-    <button mat-icon-button class="gear-icon" [matMenuTriggerFor]="menu">
-        <mat-icon>settings</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="signOut()">Sign Out</button>
-    </mat-menu>
+  <h2 class="title">Profile Summary</h2>
+  <button mat-icon-button class="gear-icon" [matMenuTriggerFor]="menu">
+      <mat-icon>settings</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="signOut()">Sign Out</button>
+  </mat-menu>
 </div>
 
 <div class="content">
-    <div class="detailsContainer">
+  <div class="detailsContainer">
       <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="account_circle" class="accountIcon"></mat-icon>
-  
+
       <div class="rowSection">
-        <h2>First Name: {{user?.firstName}}</h2>
+         <!-- When user is loading -->
+          <h2 *ngIf="!user">First Name: Loading...</h2>
+          <h2 *ngIf="user">First Name: {{user.firstName }}</h2>
       </div>
       <div class="rowSection">
-        <h2>Last Name:  {{user?.lastName}}</h2>
+          <h2 *ngIf="!user">Last Name: Loading...</h2>
+          <h2 *ngIf="user" >Last Name: {{user.lastName}}</h2>
       </div>
       <div class="rowSection">
-        <h2>Email :  {{user?.email}}</h2>
+          <h2 *ngIf="!user">Email: Loading...</h2>
+          <h2 *ngIf="user">Email: {{user.email}}</h2>
       </div>
-    </div>
   </div>
-  
+</div>
